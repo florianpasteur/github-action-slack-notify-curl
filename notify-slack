@@ -57,12 +57,28 @@ STARTED=$(
 ELAPSED=$(( `date +%s` - `date -d "$STARTED" +%s` ))
 TEXT="${TEXT}\n_Elapsed:_ ${ELAPSED}s"
 
-curl -f -d @- -H "Content-Type: application/json" "$SLACK_TOKEN" <<EOSLACKJSON
+curl -f -d -d "channel=$SLACK_CHANNEL" -d @- -H "Content-Type: application/json; charset=utf-8" -H "Authorization: Bearer $SLACK_TOKEN" -X POST https://slack.com/api/chat.postMessage <<EOSLACKJSON
 {
-  "attachments": [{
-    "text": "$TEXT",
-    "color": "$COLOR",
-    "footer": "<$GITHUB_REPO_URL|$GITHUB_REPOSITORY>"
-  }]
+	"blocks": [
+		{
+			"type": "section",
+			"text": {
+				"type": "plain_text",
+				"text": "$TEXT",
+				"emoji": true
+			}
+		},
+		{
+			"type": "context",
+			"elements": [
+				{
+					"type": "plain_text",
+					"text": "<$GITHUB_REPO_URL|$GITHUB_REPOSITORY>",
+					"emoji": true
+				}
+			]
+		}
+	]
 }
 EOSLACKJSON
+

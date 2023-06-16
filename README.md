@@ -32,8 +32,9 @@ jobs:
 
       - name: Report Status to Slack
         if: always()
-        uses: endcrawl/github-action-slack-notify-curl@master
+        uses: florianpasteur/github-action-slack-notify-curl@master
         with:
           SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
+          SLACK_CHANNEL: ${{ secrets.SLACK_CHANNEL }}
 ```
 
