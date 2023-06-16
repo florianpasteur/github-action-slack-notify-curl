@@ -2,8 +2,8 @@
 
 set -e
 
-test -n "$SLACK_WEBHOOK" || {
-  echo "No SLACK_WEBHOOK defined, skipping." 1>&2
+test -n "$SLACK_TOKEN" || {
+  echo "No SLACK_TOKEN defined, skipping." 1>&2
   exit 0
 }
 
@@ -57,7 +57,7 @@ STARTED=$(
 ELAPSED=$(( `date +%s` - `date -d "$STARTED" +%s` ))
 TEXT="${TEXT}\n_Elapsed:_ ${ELAPSED}s"
 
-curl -f -d @- -H "Content-Type: application/json" "$SLACK_WEBHOOK" <<EOSLACKJSON
+curl -f -d @- -H "Content-Type: application/json" "$SLACK_TOKEN" <<EOSLACKJSON
 {
   "attachments": [{
     "text": "$TEXT",

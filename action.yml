@@ -7,7 +7,7 @@ branding:
   icon: bell
   color: black
 inputs:
-  slack_webhook:
+  SLACK_TOKEN:
     description: Webhook URL for the custom slack app you've added to your workspace.
     required: true
   token:
@@ -23,7 +23,7 @@ runs:
     - run: $GITHUB_ACTION_PATH/notify-slack
       shell: bash
       env:
-        SLACK_WEBHOOK: ${{ inputs.slack_webhook }}
+        SLACK_TOKEN: ${{ inputs.SLACK_TOKEN }}
         TOKEN: ${{ inputs.token }}
         STATUS: ${{ job.status }}
         PR_NUMBER: ${{ github.event.number }}

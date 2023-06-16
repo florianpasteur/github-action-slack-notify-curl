@@ -7,7 +7,7 @@ Notify Slack when a GitHub Action succeeds, fails, or is cancelled. Lightweight:
 ## Setup
 
 1. Create a [custom slack app](https://api.slack.com/apps?new_app=1) and enable its webhooks.
-2. Add the webhook url as a Github secret. Examples below assume it's named `SLACK_WEBHOOK`.
+2. Add the webhook url as a Github secret. Examples below assume it's named `SLACK_TOKEN`.
 3. Incorporate the example below into your repo's `.github/workflows/` directory.
 
 ## Example Usage
@@ -34,6 +34,6 @@ jobs:
         if: always()
         uses: endcrawl/github-action-slack-notify-curl@master
         with:
-          slack_webhook: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
 ```
 
